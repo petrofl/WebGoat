@@ -1,0 +1,11 @@
+version: 1
+type: maven
+resolver:
+    serverId: soleng
+    snapshotRepo: ptfl1-maven-virtual
+    releaseRepo: ptfl1-maven-virtual
+deployer:
+    serverId: soleng
+    snapshotRepo: ptfl1-maven-local
+    releaseRepo: ptfl1-maven-virtual
+useWrapper: true

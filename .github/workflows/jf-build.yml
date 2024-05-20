@@ -20,7 +20,7 @@ jobs:
             JFROG_CLI_BUILD_NAME: 'WebGoat from GitHub workflow'
             JFROG_CLI_BUILD_NUMBER: ${{ github.run_number }}
             JFROG_BUILD_PROJECT: "ptfl1"
-            JFROG_CLI_LOG_LEVEL: INFO
+            JFROG_CLI_LOG_LEVEL: DEBUG
             MAVEN_REPO: ptfl1-maven-virtual
         steps:
             -   uses: actions/checkout@v3
@@ -35,6 +35,7 @@ jobs:
                 env:
                        # JFrog platform url (for example: https://acme.jfrog.io)
                        JF_URL: ${{ secrets.JF_URL }}
+                       JF_USER:${{secrets.JF_USERNAME}}
                        # JFrog platform access token (if JF_USER and JF_PASSWORD are not provided)
                        JF_ACCESS_TOKEN: ${{ secrets.JF_ACCESS_TOKEN }}
             -   name: Artifactory check connection

@@ -6,6 +6,5 @@ resolver:
     releaseRepo: ptfl1-maven-virtual
 deployer:
     serverId: soleng
-    snapshotRepo: ptfl1-maven-local
-    releaseRepo: ptfl1-maven-virtual
-useWrapper: true
+    snapshotRepo: ptfl1-maven-local-release
+    releaseRepo: ptfl1-maven-local-release

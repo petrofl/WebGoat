@@ -35,7 +35,7 @@ jobs:
                 env:
                        # JFrog platform url (for example: https://acme.jfrog.io)
                        JF_URL: ${{ secrets.JF_URL }}
-                       JF_USER:${{secrets.JF_USERNAME}}
+                       JF_USERNAME: ${{secrets.JF_USERNAME}}
                        # JFrog platform access token (if JF_USER and JF_PASSWORD are not provided)
                        JF_ACCESS_TOKEN: ${{ secrets.JF_ACCESS_TOKEN }}
             -   name: Artifactory check connection
@@ -48,8 +48,8 @@ jobs:
                 run: |
                   jf mvn deploy --project ${{ env.JFROG_BUILD_PROJECT }} -Dversion=1.0
             -   name: Build Docker image
-                  if: github.ref == 'refs/heads/main'
-                  run: |
+                if: github.ref == 'refs/heads/main'
+                run: |
                     jf docker build -f Dockerfile -t soleng.jfrog.io/ptfl1-docker/pwebgoat:${{ env.JFROG_CLI_BUILD_NUMBER }} .
                     jf docker push soleng.jfrog.io/ptfl1-docker/ptfl1-docker/pwebgoat:${{ env.JFROG_CLI_BUILD_NUMBER }} --project ${{ env.JFROG_BUILD_PROJECT }}
             -   name: Build the package and the info

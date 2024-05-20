@@ -21,7 +21,7 @@ jobs:
             JFROG_CLI_BUILD_NUMBER: ${{ github.run_number }}
             JFROG_BUILD_PROJECT: "ptfl1"
             JFROG_CLI_LOG_LEVEL: INFO
-            MAVEN_REPO: 
+            MAVEN_REPO: ptfl1-maven-virtual
         steps:
             -   uses: actions/checkout@v3
             -   name: Set up JDK 17

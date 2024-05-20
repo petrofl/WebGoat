@@ -20,7 +20,7 @@ jobs:
             JFROG_CLI_BUILD_NAME: 'WebGoat from GitHub workflow'
             JFROG_CLI_BUILD_NUMBER: ${{ github.run_number }}
             JFROG_BUILD_PROJECT: "ptfl1"
-            JFROG_CLI_LOG_LEVEL: DEBUG
+            JFROG_CLI_LOG_LEVEL: INFO
             MAVEN_REPO: ptfl1-maven-virtual
         steps:
             -   uses: actions/checkout@v3
@@ -47,3 +47,13 @@ jobs:
             -   name: Deploy Maven Package
                 run: |
                   jf mvn deploy --project ${{ env.JFROG_BUILD_PROJECT }} -Dversion=1.0
+            -   name: Build Docker image
+                  if: github.ref == 'refs/heads/main'
+                  run: |
+                    jf docker build -f Dockerfile -t soleng.jfrog.io/ptfl1-docker/pwebgoat:${{ env.JFROG_CLI_BUILD_NUMBER }} .
+                    jf docker push soleng.jfrog.io/ptfl1-docker/ptfl1-docker/pwebgoat:${{ env.JFROG_CLI_BUILD_NUMBER }} --project ${{ env.JFROG_BUILD_PROJECT }}
+            -   name: Build the package and the info
+                run: |
+                    jf rt bce 
+                    jf rt bag
+                    jf rt bp

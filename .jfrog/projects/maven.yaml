@@ -8,3 +8,4 @@ deployer:
     serverId: soleng
     snapshotRepo: ptfl1-maven-local-release
     releaseRepo: ptfl1-maven-local-release
+useWrapper: true
